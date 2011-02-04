@@ -18,6 +18,8 @@ function formulaires_annexer_document_charger_dist($id_document,$mode){
 	$valeurs['_hidden'] = "<input name='id_document' value='$id_document' type='hidden' />";
 	$valeurs['mode'] = $mode; // pour les id dans le dom
 	$annexe = va_annexe($id_document,$mode);
+	if ($annexe)
+		$valeurs['id_annexe'] = $annexe['id_document'];
 	$valeurs['annexe'] = $annexe;
 	$valeurs['_pipeline'] = array('editer_contenu_objet',array('type'=>'annexer_document','mode'=>$mode,'id'=>$id_document));
 

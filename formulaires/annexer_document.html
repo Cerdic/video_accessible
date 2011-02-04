@@ -1,3 +1,4 @@
+<BOUCLE_logo(DOCUMENTS){id_document=#ID_ANNEXE}{mode?}{statut?}>#SET{logo,#LOGO_DOCUMENT}</BOUCLE_logo>
 <div class='formulaire_spip formulaire_annexer_document formulaire_annexer_document-#ENV{mode}' id='formulaire_annexer_document-#ENV{mode}-#ENV{id,new}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -9,8 +10,8 @@
 				<label for="#ENV{mode}">[(#VAL{'va:label_fichier_'}|concat{#ENV{mode}}|_T)]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 				]
-				[
-				(#ENV*{annexe}|table_valeur{fichier})
+				[#GET{logo}
+				<div class="fichier">(#ENV*{annexe}|table_valeur{fichier})</div>
 				][(#ENV*{annexe}|non)[(#VAL{'va:aucun_'}|concat{#ENV{mode}}|_T)]]
 				<p class='actions'>
 				[(#ENV*{annexe}|oui)  <input type='submit' class='submit' name='supprimer' value='<:medias:bouton_supprimer|attribut_html:>' />]
