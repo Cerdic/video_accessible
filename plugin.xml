@@ -11,6 +11,6 @@
 		<inclure>va_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.8;]" />
-	<utilise id='medias' version='[1.5.0;]' />
+	<utilise id='medias' version='[1.6.0;]' />
 	<categorie>multimedia</categorie>
 </plugin>

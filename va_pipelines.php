@@ -13,9 +13,9 @@
  * @return array
  */
 function va_affiche_milieu($flux){
-	if ($flux['args']['exec']=='document_edit'
+	if (in_array($flux['args']['exec'],array('document_edit','documents_edit'))
 	  AND $id_document=$flux['args']['id_document']){
-		$flux['data'] .= "<div>Editer document $id_document</div>";
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/enrichir-video',array('id_document'=>$id_document));
 	}
 	return $flux;
 }

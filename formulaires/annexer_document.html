@@ -1,0 +1,26 @@
+<div class='formulaire_spip formulaire_annexer_document formulaire_annexer_document-#ENV{mode}' id='formulaire_annexer_document-#ENV{mode}-#ENV{id,new}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})	
+	<form action="#ENV{action}#formulaire_annexer_document-#ENV{mode}-#ENV{id,new}" method="post" enctype='multipart/form-data'><div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+			<li class="editer_fichier[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]">
+				<label for="#ENV{mode}">[(#VAL{'va:label_fichier_'}|concat{#ENV{mode}}|_T)]</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
+				]
+				[
+				(#ENV*{annexe}|table_valeur{fichier})
+				][(#ENV*{annexe}|non)[(#VAL{'va:aucun_'}|concat{#ENV{mode}}|_T)]]
+				<p class='actions'>
+				[(#ENV*{annexe}|oui)  <input type='submit' class='submit' name='supprimer' value='<:medias:bouton_supprimer|attribut_html:>' />]
+				&#91;<a href='#' onclick='jQuery("#annexer_document-#ENV{mode}").toggle("fast");return false;'><:bouton_changer:></a>&#93;
+				</p>
+				<div id='annexer_document-#ENV{mode}' style='display:none;'>
+				[(#INCLURE{fond=formulaires/inc-upload_document}{env}{joindre_upload=oui})]
+				</div>
+	    </li>
+		</ul>
+	</div></form>
+	]
+</div>
