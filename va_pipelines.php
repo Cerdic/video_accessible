@@ -19,3 +19,38 @@ function va_affiche_milieu($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Insertion dynamique du js en pied de page,
+ * uniquement en presence de video sur la page
+ * 
+ * @param string $flux
+ * @return string
+ */
+function va_affichage_final($flux){
+	if (stripos($flux,'<video')){
+		$script = compacte(find_in_path('javascript/jwplayer.init.js'),'js');
+	  lire_fichier($script, $js);
+	  $js = "var dir_jwplayer='"._DIR_PLUGIN_VA."jwplayer/';".$js;
+	  $js = '<script type="text/javascript">/*<![CDATA[*/'.$js.'/*]]>*/</script>';
+	  if ($p=stripos($flux,'</body>'))
+		  $flux = substr_replace($flux,$js,$p,0);
+	  else
+		  $flux .= $js;
+	}
+	return $flux;
+}
+
+/**
+ * Insertion statique dans l'espace prive, car on ne sait pas faire mieux pour le moment,
+ *
+ * @param string $flux
+ * @return string
+ */
+function va_header_prive($flux){
+	$js = "var dir_jwplayer='"._DIR_PLUGIN_VA."jwplayer/';";
+	$js = '<script type="text/javascript">/*<![CDATA[*/'.$js.'/*]]>*/</script>';
+	$js .= "<script type='text/javascript' src='".find_in_path('javascript/jwplayer.init.js')."'></script>";
+	$flux .= $js;
+	return $flux;
+}

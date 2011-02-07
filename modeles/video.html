@@ -58,35 +58,4 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 <div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)][
 	<br /><a href='(#GET{transcript})' title="<:va:lire_transcript|attribut_html:>"><:va:lire_transcript:></a>]</div>]
 </div>
-<script type="text/javascript">/*<![CDATA[*/
-jQuery(function(){
-	if (jQuery('.video-jwplayer').length){
-		var jwpid=0;
-		var jwpnetsream=jQuery('base').length?jQuery('base').eq(-1).attr('href'):window.location.href;
-		function init_jwplayers(){
-			jQuery('.video-jwplayer').each(function(){
-				var me=jQuery(this);
-				var options=eval('options='+me.attr('data-player')+';');
-				if (options) {
-					options = jQuery.extend({netstreambasepath: jwpnetsream,flashplayer: "#CHEMIN{jwplayer/player/player.swf}"},options);
-					var plugins = [];
-					if (options['captions.file'])
-						plugins.push('#CHEMIN{jwplayer/plugins/captions/captions-2.swf}');
-					if (options['audiodescription.file'])
-						plugins.push('#CHEMIN{jwplayer/plugins/audiodescription/audiodescription-2.swf}');
-
-					options['plugins'] = plugins.join(",");
-					if (!me.attr('id'))
-						me.attr('id','jwpid'+jwpid++);
-					jwplayer(me.attr('id')).setup(options);
-				}
-			});
-		}
-		jQuery.getScript("#CHEMIN{jwplayer/player/jwplayer.js}",function(){
-			init_jwplayers();
-			onAjaxLoad(init_jwplayers);
-		});
-	}
-});
-/*]]>*/</script>
 </BOUCLE_tous>
