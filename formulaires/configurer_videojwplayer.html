@@ -15,7 +15,7 @@
 				<BOUCLE_skins(POUR){tableau #VAL{'jwplayer/skins/'}|find_all_in_path{'.zip$',#ARRAY{}}}>
 					[(#VALEUR|match{jwplayer/skins/(.+)/(.+)\.zip$}|et{#VALEUR|basename{'.zip'}|=={#VALEUR|dirname|basename}}|oui)
 					#SET{valeur,#VALEUR|basename{.zip}}
-					<option value="#GET{valeur}"[(#ENV{skin}|=={#VALEUR}|oui)selected="selected"]>[(#VALEUR|basename{.zip}|ucfirst)]</option>
+					<option value="#GET{valeur}"[(#ENV{skin}|=={#GET{valeur}}|oui)selected="selected"]>[(#VALEUR|basename{.zip}|ucfirst)]</option>
 					]
 				</BOUCLE_skins>
 			</select>
@@ -54,24 +54,6 @@
 			</div>
 			<p class="explication"><:va:explication_param_value{param=autostart,val=oui/non}:></p>
 		</li>
-		#SET{name,allowfullscreen}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-			<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-			<span class='erreur_message'>(#GET{erreurs})</span>
-			]
-			#SET{val,oui}
-			<div class="choix">
-				<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},oui}|=={#GET{val}}|oui)checked="checked"] />
-				<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-			</div>
-			#SET{val,non}
-			<div class="choix">
-				<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
-				<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-			</div>
-			<p class="explication"><:va:explication_param_value{param=allowfullscreen,val=oui/non}:></p>
-		</li>
-
 		<li class="fieldset"><fieldset><legend><:va:label_soustitrage:></legend>
 			<p class="explication"><:va:explication_param_fichier{fonction=sous-titrage,param=soustitre,val=http://...}:></p>
 			<ul>

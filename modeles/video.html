@@ -13,7 +13,7 @@
 ][(#GET{hauteur}|plus{#GET{largeur}}|?{'',
 	[(#SET{largeur,320})][(#SET{hauteur,240})]
 })]
-#SET{skin,#ENV{skin,''}}
+#SET{skin,#ENV{skin,#CONFIG{videojwplayer/skin,''}}}
 #SET{soustitre,''}
 #SET{audiodesc,''}
 #SET{transcript,''}
@@ -46,11 +46,10 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 		'captions.state': [(#ENV{captions_state,#CONFIG{videojwplayer/captions_state,oui}}|=={oui}|?{true,false})],
 		'captions.fontsize': '[(#ENV{captions_fontsize,#CONFIG{videojwplayer/captions_fontsize,14}})]',][
 		'audiodescription.file': '(#GET{audiodesc})',
-		'audiodescription.state': [(#ENV{audiodescription_state,' '}|?{true,false})],]
+		'audiodescription.state': [(#ENV{audiodescription_state,#CONFIG{videojwplayer/audiodescription_state,oui}}|=={oui}|?{true,false})],]
 		[(#GET{skin}|oui)'skin': '[(#CHEMIN{[jwplayer/skins/#GET{skin}/(#GET{skin}).zip]})]',]
 		controlbar: '[(#ENV{controlbar,#CONFIG{videojwplayer/controlbar,bottom}})]',
-		autostart: [(#ENV{autostart,#CONFIG{videojwplayer/autostart,non}}|=={oui}|?{true,false})],
-		allowfullscreen: [(#ENV{allowfullscreen,#CONFIG{videojwplayer/allowfullscreen,oui}}|=={oui}|?{true,false})]
+		autostart: [(#ENV{autostart,#CONFIG{videojwplayer/autostart,non}}|=={oui}|?{true,false})]
 	}"
 	>[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}})]
 </video></div>
