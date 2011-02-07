@@ -12,7 +12,12 @@
 				]
 				[#GET{logo}
 				<div class="fichier">(#ENV*{annexe}|table_valeur{fichier})</div>
-				][(#ENV*{annexe}|non)[(#VAL{'va:aucun_'}|concat{#ENV{mode}}|_T)]]
+				<div class="infos">
+		  	[<span class='type'>(#ENV{annexe}|table_valeur{type_document}) - </span>]
+				<span class='taille'>[(#ENV{annexe}|table_valeur{largeur}|ou{#ENV{annexe}|table_valeur{hauteur}}|oui)[(#VAL{info_largeur_vignette}|_T{#ARRAY{largeur_vignette,#ENV{annexe}|table_valeur{largeur},hauteur_vignette,#ENV{annexe}|table_valeur{hauteur}}})] -
+				][(#ENV{annexe}|table_valeur{taille}|taille_en_octets|texte_backend)]</span>
+				</div>
+			][(#ENV*{annexe}|non)[(#VAL{'va:aucun_'}|concat{#ENV{mode}}|_T)]]
 				<p class='actions'>
 				[(#ENV*{annexe}|oui)  <input type='submit' class='submit' name='supprimer' value='<:medias:bouton_supprimer|attribut_html:>' />]
 				&#91;<a href='#' onclick='jQuery("#annexer_document-#ENV{mode}").toggle("fast");return false;'><:bouton_changer:></a>&#93;

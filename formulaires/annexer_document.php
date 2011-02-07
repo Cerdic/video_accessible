@@ -20,6 +20,8 @@ function formulaires_annexer_document_charger_dist($id_document,$mode){
 	$annexe = va_annexe($id_document,$mode);
 	if ($annexe)
 		$valeurs['id_annexe'] = $annexe['id_document'];
+	if ($annexe)
+		$annexe['type_document'] = sql_getfetsel('titre as type_document','spip_types_documents','extension='.sql_quote($annexe['extension']));
 	$valeurs['annexe'] = $annexe;
 	$valeurs['_pipeline'] = array('editer_contenu_objet',array('type'=>'annexer_document','mode'=>$mode,'id'=>$id_document));
 
