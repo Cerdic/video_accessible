@@ -42,15 +42,15 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 		description: '(#DESCRIPTIF|PtoBR|replace{\n,' '}|texte_script)',][
 		author: '(#CREDITS|texte_script)',][
 		'captions.file': '(#GET{soustitre})',
-		'captions.back': [(#ENV{captions.back,' '}|?{true,false})],
-		'captions.state': [(#ENV{captions.state,' '}|?{true,false})],
-		'captions.fontsize': '[(#ENV{captions.fontsize,14})]',][
+		'captions.back': [(#ENV{captions_back,#CONFIG{videojwplayer/captions_back,oui}}|=={oui}|?{true,false})],
+		'captions.state': [(#ENV{captions_state,#CONFIG{videojwplayer/captions_state,oui}}|=={oui}|?{true,false})],
+		'captions.fontsize': '[(#ENV{captions_fontsize,#CONFIG{videojwplayer/captions_fontsize,14}})]',][
 		'audiodescription.file': '(#GET{audiodesc})',
-		'audiodescription.state': [(#ENV{audiodescription.state,' '}|?{true,false})],]
+		'audiodescription.state': [(#ENV{audiodescription_state,' '}|?{true,false})],]
 		[(#GET{skin}|oui)'skin': '[(#CHEMIN{[jwplayer/skins/#GET{skin}/(#GET{skin}).zip]})]',]
-		controlbar: '[(#ENV{autostart,bottom})]',
-		autostart: [(#ENV{autostart,''}|?{true,false})],
-		allowfullscreen: [(#ENV{allowfullscreen,true})]
+		controlbar: '[(#ENV{controlbar,#CONFIG{videojwplayer/controlbar,bottom}})]',
+		autostart: [(#ENV{autostart,#CONFIG{videojwplayer/autostart,non}}|=={oui}|?{true,false})],
+		allowfullscreen: [(#ENV{allowfullscreen,#CONFIG{videojwplayer/allowfullscreen,oui}}|=={oui}|?{true,false})]
 	}"
 	>[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}})]
 </video></div>
