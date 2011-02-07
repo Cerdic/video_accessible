@@ -4,6 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+'lire_transcript' => 'Lire la transcription',
+
 'aucun_soustitre' => 'Aucun sous-titre',
 'aucun_audiodesc' => 'Aucune audio-description',
 'aucun_transcript' => 'Aucune transcription',

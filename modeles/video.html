@@ -1,0 +1,93 @@
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>[
+(#REM) on trouvera plusieurs variable de hauteur/largeur
+- les balises #HAUTEUR et #LARGEUR
+- #ENV{hauteur} et {largeur} correspondant <emb|hauteur=xx...>
+- #GET{hauteur} et #GET{largeur} correspondent prioritairement a #ENV,
+  puis #LARGEUR/HAUTEUR sauf si il y a un controleur
+]
+#SET{hauteur,#ENV{hauteur,#HAUTEUR}} #SET{largeur,#ENV{largeur,#LARGEUR}}
+[(#REM)
+
+	Si la taille est zero, mettre une valeur par defaut 320x240
+
+][(#GET{hauteur}|plus{#GET{largeur}}|?{'',
+	[(#SET{largeur,320})][(#SET{hauteur,240})]
+})]
+#SET{skin,#ENV{skin,''}}
+#SET{soustitre,''}
+#SET{audiodesc,''}
+#SET{transcript,''}
+<BOUCLE_annexes(DOCUMENTS spip_documents_liens){id_objet=#ID_DOCUMENT}{objet=document}{mode IN soustitre,audiodesc,transcript}{statut==.*}>#SET{#MODE,#URL_DOCUMENT}</BOUCLE_annexes>
+#SET{soustitre,#ENV{soustitre,#GET{soustitre}}}
+#SET{audiodesc,#ENV{audiodesc,#GET{audiodesc}}}
+#SET{transcript,#ENV{transcript,#GET{transcript}}}
+
+<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur}|max{120})px]']>
+<div
+	style='width:#GET{largeur}px;height:#GET{hauteur}px;margin:0 auto;overflow:hidden;'
+	class='video_placeholder'
+><video
+	src="#URL_DOCUMENT"
+	height="#GET{hauteur}"
+	width="#GET{largeur}"
+	poster="[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{src})]"
+	class="video-jwplayer"
+	data-player="{
+		file:'#URL_DOCUMENT',
+		height:#GET{hauteur},
+		width:#GET{largeur},
+		image:'[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{src})]',[
+		title: '(#TITRE|texte_script)',][
+		description: '(#DESCRIPTIF|PtoBR|replace{\n,' '}|texte_script)',][
+		author: '(#CREDITS|texte_script)',][
+		'captions.file': '(#GET{soustitre})',
+		'captions.back': [(#ENV{captions.back,' '}|?{true,false})],
+		'captions.state': [(#ENV{captions.state,' '}|?{true,false})],
+		'captions.fontsize': '[(#ENV{captions.fontsize,14})]',][
+		'audiodescription.file': '(#GET{audiodesc})',
+		'audiodescription.state': [(#ENV{audiodescription.state,' '}|?{true,false})],]
+		[(#GET{skin}|oui)'skin': '[(#CHEMIN{[jwplayer/skins/#GET{skin}/(#GET{skin}).zip]})]',]
+		controlbar: '[(#ENV{autostart,bottom})]',
+		autostart: [(#ENV{autostart,''}|?{true,false})],
+		allowfullscreen: [(#ENV{allowfullscreen,true})]
+	}"
+	>[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}})]
+</video></div>
+[
+<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][
+<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)][
+	<br /><a href='(#GET{transcript})' title="<:va:lire_transcript|attribut_html:>"><:va:lire_transcript:></a>]</div>]
+</div>
+<script type="text/javascript">/*<![CDATA[*/
+jQuery(function(){
+	if (jQuery('.video-jwplayer').length){
+		var jwpid=0;
+		var jwpnetsream=jQuery('base').length?jQuery('base').eq(-1).attr('href'):window.location.href;
+		function init_jwplayers(){
+			jQuery('.video-jwplayer').each(function(){
+				var me=jQuery(this);
+				var options=eval('options='+me.attr('data-player')+';');
+				if (options) {
+					options = jQuery.extend({netstreambasepath: jwpnetsream,flashplayer: "#CHEMIN{jwplayer/player/player.swf}"},options);
+					var plugins = [];
+					if (options['captions.file'])
+						plugins.push('#CHEMIN{jwplayer/plugins/captions/captions-2.swf}');
+					if (options['audiodescription.file'])
+						plugins.push('#CHEMIN{jwplayer/plugins/audiodescription/audiodescription-2.swf}');
+
+					options['plugins'] = plugins.join(",");
+					if (!me.attr('id'))
+						me.attr('id','jwpid'+jwpid++);
+					jwplayer(me.attr('id')).setup(options);
+				}
+			});
+		}
+		jQuery.getScript("#CHEMIN{jwplayer/player/jwplayer.js}",function(){
+			init_jwplayers();
+			onAjaxLoad(init_jwplayers);
+		});
+	}
+});
+/*]]>*/</script>
+</BOUCLE_tous>

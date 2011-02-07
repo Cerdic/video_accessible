@@ -1,9 +1,9 @@
 <plugin>
 	<nom>Video Accessible</nom>
 	<auteur>Cedric Morin [->http://www.yterium.com] pour [Temesis->http://www.temesis.com/]</auteur>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	<icon>prive/themes/spip/images/video_a-32.png</icon>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>Video avec sous-titrage, audio-description...</description>
 	<prefix>va</prefix>
 	<pipeline>
