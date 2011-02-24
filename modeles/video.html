@@ -17,47 +17,50 @@
 #SET{soustitre,''}
 #SET{audiodesc,''}
 #SET{transcript,''}
-<BOUCLE_annexes(DOCUMENTS spip_documents_liens){id_objet=#ID_DOCUMENT}{objet=document}{mode IN soustitre,audiodesc,transcript}{statut==.*}>#SET{#MODE,#URL_DOCUMENT}</BOUCLE_annexes>
+<BOUCLE_annexes(DOCUMENTS spip_documents_liens){id_objet=#ID_DOCUMENT}{objet=document}{mode IN soustitre,audiodesc,transcript}{statut==.*}>#SET{#MODE,#URL_DOCUMENT}[(#MODE|=={transcript}|oui)
+[(#SET{transcript_title,[((#EXTENSION|strtoupper)) [(#TAILLE|taille_en_octets)]]})]
+]</BOUCLE_annexes>
 #SET{soustitre,#ENV{soustitre,#GET{soustitre}}}
 #SET{audiodesc,#ENV{audiodesc,#GET{audiodesc}}}
 #SET{transcript,#ENV{transcript,#GET{transcript}}}
 
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
 style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#GET{largeur}|max{120})px]']>
-<div
-	style='width:#GET{largeur}px;height:#GET{hauteur}px;margin:0 auto;overflow:hidden;'
-	class='video_placeholder'
-><video
-	src="#URL_DOCUMENT"
-	height="#GET{hauteur}"
-	width="#GET{largeur}"
-	poster="[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{src})]"
-	class="video-jwplayer"
-	data-player="{
-		file:'#URL_DOCUMENT',
-		height:#GET{hauteur},
-		width:#GET{largeur},
-		image:'[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{src})]',[
-		title: '(#TITRE|texte_script)',][
-		description: '(#DESCRIPTIF|PtoBR|replace{\n,' '}|texte_script)',][
-		author: '(#CREDITS|texte_script)',][
-		'captions.file': '(#GET{soustitre})',
-		'captions.back': [(#ENV{captions_back,#CONFIG{videojwplayer/captions_back,oui}}|=={oui}|?{true,false})],
-		'captions.state': [(#ENV{captions_state,#CONFIG{videojwplayer/captions_state,oui}}|=={oui}|?{true,false})],
-		'captions.fontsize': '[(#ENV{captions_fontsize,#CONFIG{videojwplayer/captions_fontsize,14}})]',][
-		'audiodescription.file': '(#GET{audiodesc})',
-		'audiodescription.state': [(#ENV{audiodescription_state,#CONFIG{videojwplayer/audiodescription_state,oui}}|=={oui}|?{true,false})],
-		'audiodescription.ducking': [(#ENV{audiodescription_ducking,#CONFIG{videojwplayer/audiodescription_ducking,non}}|=={oui}|?{true,false})],]
-		[(#GET{skin}|oui)'skin': '[(#CHEMIN{[jwplayer/skins/#GET{skin}/(#GET{skin}).zip]})]',]
-		controlbar: '[(#ENV{controlbar,#CONFIG{videojwplayer/controlbar,bottom}})]',
-		dock: [(#ENV{dock,#CONFIG{videojwplayer/dock,non}}|=={oui}|?{true,false})],
-		autostart: [(#ENV{autostart,#CONFIG{videojwplayer/autostart,non}}|=={oui}|?{true,false})]
-	}"
-	>[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}})]
-</video></div>
-[
-<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>][
-<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)][
-	<br /><a href='(#GET{transcript})' title="<:va:lire_transcript|attribut_html:>"><:va:lire_transcript:></a>]</div>]
+	<div
+		style='width:#GET{largeur}px;height:#GET{hauteur}px;margin:0 auto;overflow:hidden;'
+		class='video_placeholder'
+	><video
+		src="#URL_DOCUMENT"
+		height="#GET{hauteur}"
+		width="#GET{largeur}"
+		poster="[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{src})]"
+		class="video-jwplayer"
+		data-player="{
+			file:'#URL_DOCUMENT',
+			height:#GET{hauteur},
+			width:#GET{largeur},
+			image:'[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{src})]',[
+			title: '(#TITRE|texte_script)',][
+			description: '(#DESCRIPTIF|PtoBR|replace{\n,' '}|texte_script)',][
+			author: '(#CREDITS|texte_script)',][
+			'captions.file': '(#GET{soustitre})',
+			'captions.back': [(#ENV{captions_back,#CONFIG{videojwplayer/captions_back,oui}}|=={oui}|?{true,false})],
+			'captions.state': [(#ENV{captions_state,#CONFIG{videojwplayer/captions_state,oui}}|=={oui}|?{true,false})],
+			'captions.fontsize': '[(#ENV{captions_fontsize,#CONFIG{videojwplayer/captions_fontsize,14}})]',][
+			'audiodescription.file': '(#GET{audiodesc})',
+			'audiodescription.state': [(#ENV{audiodescription_state,#CONFIG{videojwplayer/audiodescription_state,oui}}|=={oui}|?{true,false})],
+			'audiodescription.ducking': [(#ENV{audiodescription_ducking,#CONFIG{videojwplayer/audiodescription_ducking,non}}|=={oui}|?{true,false})],]
+			[(#GET{skin}|oui)'skin': '[(#CHEMIN{[jwplayer/skins/#GET{skin}/(#GET{skin}).zip]})]',]
+			controlbar: '[(#ENV{controlbar,#CONFIG{videojwplayer/controlbar,bottom}})]',
+			dock: [(#ENV{dock,#CONFIG{videojwplayer/dock,non}}|=={oui}|?{true,false})],
+			autostart: [(#ENV{autostart,#CONFIG{videojwplayer/autostart,non}}|=={oui}|?{true,false})]
+		}"
+		>[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}})]
+	</video></div>[
+	<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>]
+	<div class='spip_doc_descriptif'>[(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]][
+		<div class="transcript_link"><a href='(#GET{transcript})' title="<:va:lire_transcript|attribut_html:> [(#GET{transcript_title}|attribut_html)]"><:va:lire_transcript:></a></div>]
+		<div class="dl_flash_link"><a href='http://www.adobe.com/go/getflashplayer' title="<:va:get_flash_plugin|attribut_html:>"><:va:get_flash_plugin:></a></div>
+	</div>
 </div>
 </BOUCLE_tous>

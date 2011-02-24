@@ -18,6 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'format_audiodesc_incorrect' => 'Format incorrect : l\'audio-description doit être au format audio',
 'format_transcript_incorrect' => 'Format incorrect : la transcription doit être au format texte',
 
+'get_flash_plugin' => 'Télécharger le plug-in Flash',
+
 'label_fichier_soustitre' => 'Sous-titres',
 'label_fichier_audiodesc' => 'Audio-description',
 'label_fichier_transcript' => 'Transcription',
@@ -35,6 +37,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_autostart' => 'Autostart',
 'label_autostart_oui' => 'Démarrer automatiquement la lecture des vidéos',
 'label_autostart_non' => 'Lecture des vidéos en pause par défaut',
+
+'label_dock' => 'Boutons des plugins (audio-description, sous-titrages)',
+'label_dock_oui' => 'Afficher les boutons sur la vidéo',
+'label_dock_non' => 'Afficher les boutons dans la barre de contrôle',
 
 'label_allowfullscreen' => 'Mode plein écran',
 'label_allowfullscreen_oui' => 'Autoriser le mode plein écran',
@@ -54,6 +60,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_audiodescription_state' => 'Activation de l\'audio-description',
 'label_audiodescription_state_oui' => 'Activer l\'audio-description par défaut',
 'label_audiodescription_state_non' => 'Desactiver l\'audio-description par défaut',
+'label_audiodescription_ducking' => 'Mixage du son et de l\'audio-description',
+'label_audiodescription_ducking_oui' => 'Reduire le volume du son principal pendant l\'audio-description (consomme des ressources)',
+'label_audiodescription_ducking_non' => 'Garder le volume du son principal pendant l\'audio-description',
+
 'label_transcription' => 'Transcription',
 
 'explication_param_value' => 'Ce réglage peut être surchargé a l\'insertion du document : <tt>&lt;embXX|@param@=@val@></tt>',

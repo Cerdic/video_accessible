@@ -54,6 +54,23 @@
 			</div>
 			<p class="explication"><:va:explication_param_value{param=autostart,val=oui/non}:></p>
 		</li>
+		#SET{name,dock}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+		<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+			<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+			<span class='erreur_message'>(#GET{erreurs})</span>
+			]
+			#SET{val,oui}
+			<div class="choix">
+				<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
+				<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+			</div>
+			#SET{val,non}
+			<div class="choix">
+				<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},non}|=={#GET{val}}|oui)checked="checked"] />
+				<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+			</div>
+			<p class="explication"><:va:explication_param_value{param=dock,val=oui/non}:></p>
+		</li>
 		<li class="fieldset"><fieldset><legend><:va:label_soustitrage:></legend>
 			<p class="explication"><:va:explication_param_fichier{fonction=sous-titrage,param=soustitre,val=http://...}:></p>
 			<ul>
@@ -120,6 +137,23 @@
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
 					<p class="explication"><:va:explication_param_value{param=audiodescription_state,val=oui/non}:></p>
+				</li>
+				#SET{name,audiodescription_ducking}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					#SET{val,oui}
+					<div class="choix">
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					</div>
+					#SET{val,non}
+					<div class="choix">
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},non}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					</div>
+					<p class="explication"><:va:explication_param_value{param=audiodescription_ducking,val=oui/non}:></p>
 				</li>
 			</ul></fieldset>
 		</li>
