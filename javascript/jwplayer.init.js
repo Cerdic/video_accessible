@@ -20,7 +20,7 @@ jQuery(function(){
 					options = jQuery.extend({netstreambasepath: jwpnetsream,flashplayer: dir_jwplayer+"player/player.swf"},options);
 
 					// detecter le besoin du plugin caption ou audiodescription
-					var plugins = [];
+					var plugins = [dir_jwplayer+'plugins/backstroke/backstroke-1.swf'];
 					if (options['captions.file'])
 						plugins.push(dir_jwplayer+'plugins/captions/captions-2.swf');
 					if (options['audiodescription.file'])
