@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'format_transcript_incorrect' => 'Format incorrect : la transcription doit être au format texte',
 
 'get_flash_plugin' => 'Télécharger le plug-in Flash',
+'lien_ouvrant' => 'Nouvelle fenêtre',
 
 'label_fichier_soustitre' => 'Sous-titres',
 'label_fichier_audiodesc' => 'Audio-description',
@@ -70,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_param_fichier' => 'Vous pouvez définir une url de fichier de @fonction@ lors de l\'insertion du document : <tt>&lt;embXX|@param@=@val@></tt>',
 'configurer_player_video_accessible' => 'Configurer le lecteur vidéo accessible',
 'explication_insertion_lecteur_video' => "Le lecteur vidéo est automatiquement inséré dans la page lorsque vous utilisez <tt>&lt;embXX></tt> sur un document de type vidéo, en remplaçant XX par le numéro du document.
-Le lecteur peut être personalisé avec les réglages ci-dessous."
+Le lecteur peut être personnalisé avec les réglages ci-dessous."
 
 );
 ?>

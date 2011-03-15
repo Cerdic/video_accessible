@@ -1,0 +1,24 @@
+<BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}>
+
+#SET{transcript,''}
+<BOUCLE_annexes(DOCUMENTS spip_documents_liens){id_objet=#ID_DOCUMENT}{objet=document}{mode IN transcript}{statut==.*}>#SET{#MODE,#URL_DOCUMENT}[(#MODE|=={transcript}|oui)
+[(#SET{transcript_title,[: (#TITRE|attribut_html|sinon{#_tous:FICHIER|basename})] [((#EXTENSION|strtoupper)) [(#TAILLE|taille_en_octets)]]})]
+]</BOUCLE_annexes>
+#SET{transcript,#ENV{transcript,#GET{transcript}}}
+
+<div	class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+	style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})[width:(#ENV{largeur}|max{120})px]']>
+<object	data='#URL_DOCUMENT'
+	type='#MIME_TYPE'
+	width='#ENV{largeur, #LARGEUR}'
+	height='#ENV{hauteur, #HAUTEUR}' >
+	<param name='src' value='#URL_DOCUMENT' />
+	[(#ID_DOCUMENT|appliquer_filtre{#MIME_TYPE})]
+	[(#ENV*|env_to_params)]
+</object>
+[<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>]
+[<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+[<div class='spip_transcript_link'><a href='(#GET{transcript})' title="<:va:lire_transcript|attribut_html:> [(#GET{transcript_title}|attribut_html)]" class="dBlue">&gt; <:va:lire_transcript:></a></div>]
+</div>
+</BOUCLE_tous>
+#FILTRE{trim}

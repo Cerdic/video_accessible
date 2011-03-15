@@ -18,7 +18,7 @@
 #SET{audiodesc,''}
 #SET{transcript,''}
 <BOUCLE_annexes(DOCUMENTS spip_documents_liens){id_objet=#ID_DOCUMENT}{objet=document}{mode IN soustitre,audiodesc,transcript}{statut==.*}>#SET{#MODE,#URL_DOCUMENT}[(#MODE|=={transcript}|oui)
-[(#SET{transcript_title,[((#EXTENSION|strtoupper)) [(#TAILLE|taille_en_octets)]]})]
+[(#SET{transcript_title,[: (#_tous:TITRE|attribut_html|sinon{#TITRE|attribut_html|sinon{#_tous:FICHIER|basename}})] [((#EXTENSION|strtoupper)) [(#TAILLE|taille_en_octets)]]})]
 ]</BOUCLE_annexes>
 #SET{soustitre,#ENV{soustitre,#GET{soustitre}}}
 #SET{audiodesc,#ENV{audiodesc,#GET{audiodesc}}}
@@ -58,9 +58,11 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 		>[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}})]
 	</video></div>[
 	<div class='spip_doc_titre'><strong>(#TITRE)</strong></div>]
-	<div class='spip_doc_descriptif'>[(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]][
-		<div class="transcript_link"><a href='(#GET{transcript})' title="<:va:lire_transcript|attribut_html:> [(#GET{transcript_title}|attribut_html)]"><:va:lire_transcript:></a></div>]
-		<div class="dl_flash_link"><a href='http://www.adobe.com/go/getflashplayer' title="<:va:get_flash_plugin|attribut_html:>"><:va:get_flash_plugin:></a></div>
+	[<div class='spip_doc_descriptif'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
+	<div class="spip_doc_links" style='width:#GET{largeur}px;margin:0 auto;overflow:hidden;'>
+		[<div class='spip_transcript_link'><a href='(#GET{transcript})' title="<:va:lire_transcript|attribut_html:> [(#GET{transcript_title}|attribut_html)]"><:va:lire_transcript:></a></div>]
+		<div class='spip_flash_link'><a title="<:va:get_flash_plugin:> - <:va:lien_ouvrant:>" target="_blank" href="http://www.adobe.com/go/getflashplayer"><:va:get_flash_plugin:></a></div>
 	</div>
 </div>
 </BOUCLE_tous>
+#FILTRE{trim}
