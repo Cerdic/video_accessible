@@ -8,6 +8,7 @@ jQuery(function(){
 		 * Url de base, qui prend en compre le <base> du document
 		 */
 		var jwpnetsream=jQuery('base').length?jQuery('base').eq(-1).attr('href'):window.location.href;
+		jwpnetsream = jwpnetsream.replace(/^https?:\/\/[^\/]*/,'');
 
 		/**
 		 * Fonction d'initialisation de chaque video
@@ -22,9 +23,17 @@ jQuery(function(){
 					// detecter le besoin du plugin caption ou audiodescription
 					var plugins = [];
 					if (options['captions.file'])
-						plugins.push(dir_jwplayer+'plugins/captions/captions-2.swf');
+						// version online du plugin, qui moucharde les visiteurs chez longtail
+						plugins.push('captions-2');
+						// version locale du plugin, a up avec le player
+						// en attente bugfix : http://developer.longtailvideo.com/trac/ticket/1263
+						//plugins.push(jwpnetsream+dir_jwplayer+'plugins/captions/captions-h.swf');
 					if (options['audiodescription.file'])
-						plugins.push(dir_jwplayer+'plugins/audiodescription/audiodescription-2.swf');
+						// version online du plugin, qui moucharde les visiteurs chez longtail
+						plugins.push('audiodescription-2');
+						// version locale du plugin, a up avec le player
+						// en attente bugfix : http://developer.longtailvideo.com/trac/ticket/1263
+						//plugins.push(jwpnetsream+dir_jwplayer+'plugins/audiodescription/audiodescription-h.swf');
 
 					options['plugins'] = plugins.join(",");
 					if (!me.attr('id'))
