@@ -29,7 +29,10 @@ function va_affiche_milieu($flux){
  */
 function va_affichage_final($flux){
 	if (stripos($flux,'video-jwplayer')){
-		$script = compacte(find_in_path('javascript/jwplayer.init.js'),'js');
+		$script = find_in_path('javascript/jwplayer.init.js');
+		include_spip('filtres/compresseur');
+		if (function_exists('compacte'))
+			$script = compacte($script,'js');
 	  lire_fichier($script, $js);
 	  $js = "var dir_jwplayer='"._DIR_PLUGIN_VA."jwplayer/';".$js;
 	  $js = '<script type="text/javascript">/*<![CDATA[*/'.$js.'/*]]>*/</script>';
