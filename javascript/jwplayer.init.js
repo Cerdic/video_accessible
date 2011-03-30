@@ -7,8 +7,11 @@ jQuery(function(){
 		/**
 		 * Url de base, qui prend en compre le <base> du document
 		 */
-		var jwpnetsream=jQuery('base').length?jQuery('base').eq(-1).attr('href'):window.location.href;
-		jwpnetsream = jwpnetsream.replace(/^https?:\/\/[^\/]*/,'');
+		var jwpnetsream='';
+		if (jQuery('base').length) {
+			jwpnetsream = jQuery('base').eq(-1).attr('href');
+			jwpnetsream = jwpnetsream.replace(/^https?:\/\/[^\/]*/,'');
+		}
 
 		/**
 		 * Fonction d'initialisation de chaque video
@@ -18,7 +21,9 @@ jQuery(function(){
 				var me=jQuery(this);
 				var options=eval('options='+me.attr('data-player')+';');
 				if (options) {
-					options = jQuery.extend({netstreambasepath: jwpnetsream,flashplayer: dir_jwplayer+"player/player.swf"},options);
+					options = jQuery.extend({flashplayer: dir_jwplayer+"player/player.swf"},options);
+					if (jwpnetsream)
+						options = jQuery.extend({netstreambasepath: jwpnetsream},options);
 
 					// detecter le besoin du plugin caption ou audiodescription
 					var plugins = [];
