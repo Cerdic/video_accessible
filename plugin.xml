@@ -3,6 +3,7 @@
 	<auteur>Cedric Morin [->http://www.yterium.com] pour [Temesis->http://www.temesis.com/]</auteur>
 	<version>0.5.0</version>
 	<icon>prive/themes/spip/images/video_a-32.png</icon>
+	<lien>http://www.spip-contrib.net/Video-Accessible</lien>
 	<etat>stable</etat>
 	<description>Video avec sous-titrage, audio-description...</description>
 	<prefix>va</prefix>
