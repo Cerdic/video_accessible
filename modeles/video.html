@@ -39,6 +39,7 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 			file:'#URL_DOCUMENT',
 			height:#GET{hauteur},
 			width:#GET{largeur},
+			wmode: 'window',
 			image:'[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{src})]',[
 			title: '(#TITRE|texte_script)',][
 			description: '(#DESCRIPTIF|PtoBR|replace{\n,' '}|texte_script)',][
