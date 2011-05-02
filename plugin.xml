@@ -21,5 +21,6 @@
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.8;]" />
 	<utilise id='medias' version='[1.6.0;]' />
+	<utilise id='Accessibilite' version='[0.8.3;]' />
 	<categorie>multimedia</categorie>
 </plugin>
