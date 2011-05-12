@@ -29,16 +29,16 @@ jQuery(function(){
 					var plugins = [];
 					if (options['captions.file'])
 						// version online du plugin, qui moucharde les visiteurs chez longtail
-						plugins.push('captions-2');
+						//plugins.push('captions-2');
 						// version locale du plugin, a up avec le player
 						// en attente bugfix : http://developer.longtailvideo.com/trac/ticket/1263
-						//plugins.push(jwpnetsream+dir_jwplayer+'plugins/captions/captions-h.swf');
+						plugins.push(jwpnetsream+dir_jwplayer+'plugins/captions/captions-h.swf');
 					if (options['audiodescription.file'])
 						// version online du plugin, qui moucharde les visiteurs chez longtail
-						plugins.push('audiodescription-2');
+						//plugins.push('audiodescription-2');
 						// version locale du plugin, a up avec le player
 						// en attente bugfix : http://developer.longtailvideo.com/trac/ticket/1263
-						//plugins.push(jwpnetsream+dir_jwplayer+'plugins/audiodescription/audiodescription-h.swf');
+						plugins.push(jwpnetsream+dir_jwplayer+'plugins/audiodescription/audiodescription-h.swf');
 
 					options['plugins'] = plugins.join(",");
 					if (!me.attr('id'))
