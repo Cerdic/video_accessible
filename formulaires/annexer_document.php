@@ -62,8 +62,8 @@ function formulaires_annexer_document_traiter_dist($id_document,$mode){
 
 		$ajoute = $ajouter_documents($id,$files,'document',$id_document,$mode);
 
-		if (is_int(reset($ajoute))){
-			$id = reset($ajoute);
+		if (is_numeric(reset($ajoute))
+		  AND $id = reset($ajoute)){
 			$res['message_ok'] = _T('medias:document_installe_succes');
 		}
 		else
