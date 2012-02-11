@@ -40,7 +40,8 @@ jQuery(function(){
 						// en attente bugfix : http://developer.longtailvideo.com/trac/ticket/1263
 						plugins.push(jwpnetsream+dir_jwplayer+'plugins/audiodescription/audiodescription-h.swf');
 
-					options['plugins'] = plugins.join(",");
+					if (plugins.length)
+						options['plugins'] = plugins.join(",");
 					if (!me.attr('id'))
 						me.attr('id','jwpid'+jwpid++);
 					jwplayer(me.attr('id')).setup(options);
