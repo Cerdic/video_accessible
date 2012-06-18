@@ -54,7 +54,13 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 			[(#GET{skin}|oui)'skin': '[(#CHEMIN{[jwplayer/skins/#GET{skin}/(#GET{skin}).zip]})]',]
 			controlbar: '[(#ENV{controlbar,#CONFIG{videojwplayer/controlbar,bottom}})]',
 			dock: ['(#ENV{dock,#CONFIG{videojwplayer/dock,non}}|=={oui}|?{true,false})'],
-			autostart: [(#ENV{autostart,#CONFIG{videojwplayer/autostart,non}}|=={oui}|?{true,false})]
+			autostart: [(#ENV{autostart,#CONFIG{videojwplayer/autostart,non}}|=={oui}|?{true,false})],
+			[(#REM)
+				suppression viral
+				http://www.longtailvideo.com/addons/get-plugin.php?addon=47&vid=116
+			]'viral.onpause':'false',
+			'viral.oncomplete':'false',
+			'viral.allowmenu':'false'
 		}"
 		>[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}})]
 	</video></div>[
