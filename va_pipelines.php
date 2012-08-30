@@ -23,12 +23,14 @@ function va_affiche_milieu($flux){
 /**
  * Insertion dynamique du js en pied de page,
  * uniquement en presence de video sur la page
+ * et sur les pages html ! (pas dans les flux rss ou autre)
  * 
  * @param string $flux
  * @return string
  */
 function va_affichage_final($flux){
-	if (stripos($flux,'video-jwplayer')){
+	if ($GLOBALS['html']
+		AND stripos($flux,'video-jwplayer')){
 		$script = find_in_path('javascript/jwplayer.init.js');
 		include_spip('filtres/compresseur');
 		if (function_exists('compacte'))
