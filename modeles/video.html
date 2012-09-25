@@ -41,9 +41,9 @@ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{alig
 			width:#GET{largeur},
 			wmode: 'window',
 			image:'[(#LOGO_DOCUMENT{vignette}|image_reduire{#GET{largeur},#GET{hauteur}}|extraire_attribut{src})]',[
-			title: '(#TITRE|texte_script)',][
-			description: '(#DESCRIPTIF|supprimer_tags|texte_script)',][
-			author: '(#CREDITS|texte_script)',][
+			title: '(#TITRE|texte_script|attribut_html)',][
+			description: '(#DESCRIPTIF|supprimer_tags|texte_script|attribut_html)',][
+			author: '(#CREDITS|texte_script|attribut_html)',][
 			'captions.file': '(#GET{soustitre})',
 			'captions.back': [(#ENV{captions_back,#CONFIG{videojwplayer/captions_back,oui}}|=={oui}|?{true,false})],
 			'captions.state': [(#ENV{captions_state,#CONFIG{videojwplayer/captions_state,oui}}|=={oui}|?{true,false})],
