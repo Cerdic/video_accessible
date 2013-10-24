@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Video Accessible</nom>
 	<auteur>Cedric Morin [->http://www.yterium.com] pour [Temesis->http://www.temesis.com/]</auteur>
-	<version>0.6.7</version>
+	<version>0.6.8</version>
 	<icon>prive/themes/spip/images/video_a-32.png</icon>
 	<lien>http://www.spip-contrib.net/Video-Accessible</lien>
 	<etat>stable</etat>
