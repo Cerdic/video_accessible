@@ -1,11 +1,21 @@
 <plugin>
 	<nom>Video Accessible</nom>
-	<auteur>Cedric Morin [->http://www.yterium.com] pour [Temesis->http://www.temesis.com/]</auteur>
-	<version>0.6.8</version>
+	<auteur>[Cedric Morin->http://www.yterium.com] pour [Temesis->http://www.temesis.com/]</auteur>
+	<slogan>Faciliter la diffusion de vidéos accessibles</slogan>
+	<version>0.6.9</version>
 	<icon>prive/themes/spip/images/video_a-32.png</icon>
 	<lien>http://www.spip-contrib.net/Video-Accessible</lien>
 	<etat>stable</etat>
-	<description>Video avec sous-titrage, audio-description...</description>
+	<description>
+Afin d’être pleinement accessible, une vidéo (composée d’images et de sons) doit répondre à plusieurs critères (alternative textuelle, sous-titres, audio-description...).
+
+Ce plugin permet de répondre à ces critères en permettant, d'une part, l’association entre une vidéo et les différents fichiers servant d’alternatives :
+-* fichier de transcript;
+-* fichier de sous-titre;
+-* fichier d’audio-description,
+
+et d'autre part, d'afficher cette vidéo dans un lecteur vidéo accessible.
+	</description>
 	<prefix>va</prefix>
 	<pipeline>
 		<nom>affiche_milieu</nom>
@@ -20,7 +30,7 @@
 		<inclure>va_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.8;3.0.99]" />
-	<utilise id='medias' version='[1.6.0;]' />
-	<utilise id='Accessibilite' version='[0.8.3;]' />
+	<utilise id="medias" version="[1.6.0;]" />
+	<utilise id="Accessibilite" version="[0.8.3;]" />
 	<categorie>multimedia</categorie>
 </plugin>
