@@ -55,13 +55,17 @@ function formulaires_annexer_document_traiter_dist($id_document,$mode){
 		$res['message_ok'] = _T('va:document_annexe_'.$mode.'_supprime');
 	}
 	else {
+		include_spip('inc/autoriser');
+		// donner une autorisation exceptionnelle temporaire
+		autoriser_exception('associerdocuments', 'document', $id_document);
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 
 		include_spip('inc/joindre_document');
 		$files = joindre_trouver_fichier_envoye();
 
 		$ajoute = $ajouter_documents($id,$files,'document',$id_document,$mode);
-
+		// retirer l'autorisation exceptionnelle
+		autoriser_exception('associerdocuments', 'document', $id_document, false);
 		if (is_numeric(reset($ajoute))
 		  AND $id = reset($ajoute)){
 			$res['message_ok'] = _T('medias:document_installe_succes');
